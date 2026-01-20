@@ -34,12 +34,12 @@
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
-            this.uC_Usuario1 = new Capa_de_presentacion.UC_Usuario();
             this.btnSucursales = new System.Windows.Forms.Button();
             this.btnInventario = new System.Windows.Forms.Button();
             this.btnMarcas = new System.Windows.Forms.Button();
             this.btnRoles = new System.Windows.Forms.Button();
             this.btnPagos = new System.Windows.Forms.Button();
+            this.uC_Usuario1 = new Capa_de_presentacion.UC_Usuario();
             this.panelOpciones.SuspendLayout();
             this.panelCentral.SuspendLayout();
             this.SuspendLayout();
@@ -108,14 +108,6 @@
             this.panelCentral.Size = new System.Drawing.Size(1032, 562);
             this.panelCentral.TabIndex = 1;
             // 
-            // uC_Usuario1
-            // 
-            this.uC_Usuario1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uC_Usuario1.Location = new System.Drawing.Point(0, 0);
-            this.uC_Usuario1.Name = "uC_Usuario1";
-            this.uC_Usuario1.Size = new System.Drawing.Size(1032, 562);
-            this.uC_Usuario1.TabIndex = 0;
-            // 
             // btnSucursales
             // 
             this.btnSucursales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -127,6 +119,7 @@
             this.btnSucursales.TabIndex = 2;
             this.btnSucursales.Text = "Sucursales";
             this.btnSucursales.UseVisualStyleBackColor = false;
+            this.btnSucursales.Click += new System.EventHandler(this.btnSucursales_Click);
             // 
             // btnInventario
             // 
@@ -175,6 +168,14 @@
             this.btnPagos.TabIndex = 6;
             this.btnPagos.Text = "Pagos";
             this.btnPagos.UseVisualStyleBackColor = false;
+            // 
+            // uC_Usuario1
+            // 
+            this.uC_Usuario1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_Usuario1.Location = new System.Drawing.Point(0, 0);
+            this.uC_Usuario1.Name = "uC_Usuario1";
+            this.uC_Usuario1.Size = new System.Drawing.Size(1032, 562);
+            this.uC_Usuario1.TabIndex = 0;
             // 
             // FrmAdmin
             // 

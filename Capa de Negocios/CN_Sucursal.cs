@@ -9,7 +9,7 @@ using Capa_de_Negocios;
 
 namespace Capa_de_Negocios
 {
-    internal class CN_Sucursal
+    public class CN_Sucursal
     {
         private CN_Conexion conexion = new CN_Conexion();
 
