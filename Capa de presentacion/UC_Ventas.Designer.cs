@@ -1,6 +1,6 @@
 ﻿namespace Capa_de_presentacion
 {
-    partial class UC_Venta
+    partial class UC_Ventas
     {
         /// <summary> 
         /// Variable del diseñador necesaria.

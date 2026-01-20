@@ -114,11 +114,11 @@
     <Compile Include="UC_Usuario.Designer.cs">
       <DependentUpon>UC_Usuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC_Venta.cs">
+    <Compile Include="UC_Ventas.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Venta.Designer.cs">
-      <DependentUpon>UC_Venta.cs</DependentUpon>
+    <Compile Include="UC_Ventas.Designer.cs">
+      <DependentUpon>UC_Ventas.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmAdmin.resx">
       <DependentUpon>FrmAdmin.cs</DependentUpon>
@@ -146,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Roles.resx">
       <DependentUpon>UC_Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_TiposDePago.resx">
+      <DependentUpon>UC_TiposDePago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_Usuario.resx">
       <DependentUpon>UC_Usuario.cs</DependentUpon>

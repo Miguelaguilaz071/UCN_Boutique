@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Capa_de_presentacion
 {
-    public partial class UC_Venta : UserControl
+    public partial class UC_Ventas : UserControl
     {
-        public UC_Venta()
+        public UC_Ventas()
         {
             InitializeComponent();
         }

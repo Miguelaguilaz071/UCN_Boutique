@@ -60,5 +60,17 @@ namespace Capa_de_presentacion
             UC_Roles ucRoles = new UC_Roles();
             CargarUserControl(ucRoles);
         }
+
+        private void btnPagos_Click(object sender, EventArgs e)
+        {
+            UC_TiposDePago ucPagos = new UC_TiposDePago();
+            CargarUserControl(ucPagos);
+        }
+
+        private void btnVentas_Click(object sender, EventArgs e)
+        {
+            UC_Ventas uc_Venta = new UC_Ventas();
+            CargarUserControl (uc_Venta);
+        }
     }
 }
