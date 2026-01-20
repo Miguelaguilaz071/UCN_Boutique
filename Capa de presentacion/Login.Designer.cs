@@ -121,7 +121,6 @@
             this.btnCrearCuenta.TabIndex = 5;
             this.btnCrearCuenta.TabStop = true;
             this.btnCrearCuenta.Text = "Crear cuenta";
-            this.btnCrearCuenta.Visible = false;
             this.btnCrearCuenta.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.btnCrearCuenta_LinkClicked);
             // 
             // btnMinimizar

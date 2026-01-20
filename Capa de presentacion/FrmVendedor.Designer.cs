@@ -28,12 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmVendedor));
+            this.uC_Ventas1 = new Capa_de_presentacion.UC_Ventas();
+            this.SuspendLayout();
+            // 
+            // uC_Ventas1
+            // 
+            this.uC_Ventas1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uC_Ventas1.Location = new System.Drawing.Point(0, 0);
+            this.uC_Ventas1.Name = "uC_Ventas1";
+            this.uC_Ventas1.Size = new System.Drawing.Size(1032, 553);
+            this.uC_Ventas1.TabIndex = 0;
+            // 
+            // FrmVendedor
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1032, 553);
+            this.Controls.Add(this.uC_Ventas1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "FrmVendedor";
             this.Text = "FrmVendedor";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private UC_Ventas uC_Ventas1;
     }
 }
