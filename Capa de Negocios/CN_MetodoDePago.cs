@@ -14,7 +14,7 @@ namespace Capa_de_Negocios
         private CN_Conexion conexion = new CN_Conexion();
 
         // Agregar método de pago
-        public void AgregarMetodoPago(int Id_usuario, int Id_tipoTarjeta, string Token, string Exp)
+        public void AgregarMetodoPago(int Id_usuario, int Id_tipoPago, string Token)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
@@ -23,9 +23,8 @@ namespace Capa_de_Negocios
                 {
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.AddWithValue("@Id_usuario", Id_usuario);
-                    comando.Parameters.AddWithValue("@Id_tipoTarjeta", Id_tipoTarjeta);
+                    comando.Parameters.AddWithValue("@Id_tipoPago", Id_tipoPago);
                     comando.Parameters.AddWithValue("@Token", Token);
-                    comando.Parameters.AddWithValue("@Exp", Exp);
                     comando.ExecuteNonQuery();
                 }
             }
@@ -34,7 +33,7 @@ namespace Capa_de_Negocios
         // Mostrar métodos de pago
         public DataTable MostrarMetodosPago()
         {
-            DataTable metodoPago = new DataTable();
+            DataTable metodos = new DataTable();
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
@@ -43,15 +42,15 @@ namespace Capa_de_Negocios
                     comando.CommandType = CommandType.StoredProcedure;
                     using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        metodoPago.Load(reader);
+                        metodos.Load(reader);
                     }
                 }
             }
-            return metodoPago;
+            return metodos;
         }
 
         // Modificar método de pago
-        public void EditarMetodoPago(int Id_metodoPago, int Id_usuario, int Id_tipoTarjeta, string Token, string Exp)
+        public void EditarMetodoPago(int Id_metodoPago, int Id_usuario, int Id_tipoPago, string Token)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
@@ -61,9 +60,8 @@ namespace Capa_de_Negocios
                     comando.CommandType = CommandType.StoredProcedure;
                     comando.Parameters.AddWithValue("@Id_metodoPago", Id_metodoPago);
                     comando.Parameters.AddWithValue("@Id_usuario", Id_usuario);
-                    comando.Parameters.AddWithValue("@Id_tipoTarjeta", Id_tipoTarjeta);
+                    comando.Parameters.AddWithValue("@Id_tipoPago", Id_tipoPago);
                     comando.Parameters.AddWithValue("@Token", Token);
-                    comando.Parameters.AddWithValue("@Exp", Exp);
                     comando.ExecuteNonQuery();
                 }
             }
