@@ -80,8 +80,7 @@ namespace Capa_de_presentacion
                 this.Hide();
                 if (rol == "Cliente")
                 {
-                   FrmTienda tienda = new FrmTienda();
-                    tienda.ShowDialog();
+                    MessageBox.Show("Acceso denegado");
                 }
                 else if (rol == "Administrador")
                 {
