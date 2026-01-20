@@ -132,6 +132,7 @@
             this.btnInventario.TabIndex = 3;
             this.btnInventario.Text = "Inventario";
             this.btnInventario.UseVisualStyleBackColor = false;
+            this.btnInventario.Click += new System.EventHandler(this.btnInventario_Click);
             // 
             // btnMarcas
             // 

@@ -42,5 +42,11 @@ namespace Capa_de_presentacion
             UC_Sucursales ucSucursales = new UC_Sucursales();
             CargarUserControl(ucSucursales);
         }
+
+        private void btnInventario_Click(object sender, EventArgs e)
+        {
+            UC_Inventario ucInventario = new UC_Inventario();
+            CargarUserControl(ucInventario);
+        }
     }
 }

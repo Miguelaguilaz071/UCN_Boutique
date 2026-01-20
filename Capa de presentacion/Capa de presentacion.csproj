@@ -126,6 +126,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UC_Inventario.resx">
+      <DependentUpon>UC_Inventario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_Productos.resx">
       <DependentUpon>UC_Productos.cs</DependentUpon>
     </EmbeddedResource>
