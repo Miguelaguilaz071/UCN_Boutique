@@ -162,7 +162,7 @@ namespace Capa_de_presentacion
         {
             try
             {
-                int rol = Convert.ToInt32(cmbRol.SelectedIndex);
+                int rol = Convert.ToInt32(cmbRol.SelectedValue);
                 if (estado == EstadoFormulario.Nuevo)
                 {
                     cn_usuario.agregarUsuario(
