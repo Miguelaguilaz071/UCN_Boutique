@@ -9,12 +9,12 @@ using Capa_de_Negocios;
 
 namespace Capa_de_Negocios
 {
-    internal class CN_MetodoDePago
+    public class CN_MetodoDePago
     {
         private CN_Conexion conexion = new CN_Conexion();
 
-        //agregar metodo de pago
-        public void AgregarMetodoPago(int Id_usuario, int Id_tipoTarjeta, string Token, string FechaExp)
+        // Agregar método de pago
+        public void AgregarMetodoPago(int Id_usuario, int Id_tipoTarjeta, string Token, string Exp)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
@@ -25,33 +25,33 @@ namespace Capa_de_Negocios
                     comando.Parameters.AddWithValue("@Id_usuario", Id_usuario);
                     comando.Parameters.AddWithValue("@Id_tipoTarjeta", Id_tipoTarjeta);
                     comando.Parameters.AddWithValue("@Token", Token);
-                    comando.Parameters.AddWithValue("@FechaExp", FechaExp);
+                    comando.Parameters.AddWithValue("@Exp", Exp);
                     comando.ExecuteNonQuery();
                 }
             }
         }
 
-        //mostrar metodos de pago
-        public DataTable mostrarMetodosPago()
+        // Mostrar métodos de pago
+        public DataTable MostrarMetodosPago()
         {
-            DataTable Metodo = new DataTable();
+            DataTable metodoPago = new DataTable();
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
                 using (SqlCommand comando = new SqlCommand("P_mostrarMetodoPago", con))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
-                    using (SqlDataReader leer = comando.ExecuteReader())
+                    using (SqlDataReader reader = comando.ExecuteReader())
                     {
-                        Metodo.Load(leer);
+                        metodoPago.Load(reader);
                     }
                 }
             }
-            return Metodo;
+            return metodoPago;
         }
 
-        //editar metodos de pago
-        public void EditarMetodoPago(int Id_metodoPago,int Id_usuario, int Id_tipoTarjeta, string Token, string FechaExp)
+        // Modificar método de pago
+        public void EditarMetodoPago(int Id_metodoPago, int Id_usuario, int Id_tipoTarjeta, string Token, string Exp)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
@@ -63,13 +63,13 @@ namespace Capa_de_Negocios
                     comando.Parameters.AddWithValue("@Id_usuario", Id_usuario);
                     comando.Parameters.AddWithValue("@Id_tipoTarjeta", Id_tipoTarjeta);
                     comando.Parameters.AddWithValue("@Token", Token);
-                    comando.Parameters.AddWithValue("@FechaExp", FechaExp);
+                    comando.Parameters.AddWithValue("@Exp", Exp);
                     comando.ExecuteNonQuery();
                 }
             }
         }
 
-        //eliminar metodo de pago
+        // Eliminar método de pago
         public void EliminarMetodoPago(int Id_metodoPago)
         {
             using (SqlConnection con = conexion.crearConexion())

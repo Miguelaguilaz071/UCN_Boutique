@@ -48,5 +48,17 @@ namespace Capa_de_presentacion
             UC_Inventario ucInventario = new UC_Inventario();
             CargarUserControl(ucInventario);
         }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            UC_Marcas ucMarcas = new UC_Marcas();
+            CargarUserControl(ucMarcas);
+        }
+
+        private void btnRoles_Click(object sender, EventArgs e)
+        {
+            UC_Roles ucRoles = new UC_Roles();
+            CargarUserControl(ucRoles);
+        }
     }
 }

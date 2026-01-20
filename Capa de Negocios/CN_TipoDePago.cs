@@ -9,70 +9,70 @@ using Capa_de_Negocios;
 
 namespace Capa_de_Negocios
 {
-    internal class CN_TipoDeTarjeta
+    public class CN_TipoPago
     {
         private CN_Conexion conexion = new CN_Conexion();
 
-        //agregar rol
-        public void AgregarTipoTarjeta(string Nombre)
+        // Agregar tipo de pago
+        public void AgregarTipoPago(string nombre)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
-                using (SqlCommand comando = new SqlCommand("P_agregarTipoTarjeta", con))
+                using (SqlCommand comando = new SqlCommand("P_agregarTipoPago", con))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@Nombre", Nombre);
+                    comando.Parameters.AddWithValue("@Nombre", nombre);
                     comando.ExecuteNonQuery();
                 }
             }
         }
 
-        //mostrar Tipos de tarjetas
-        public DataTable mostrarTiposTarjetas()
+        // Mostrar tipos de pago
+        public DataTable MostrarTiposPago()
         {
-            DataTable Tipos = new DataTable();
+            DataTable tiposPago = new DataTable();
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
-                using (SqlCommand comando = new SqlCommand("P_mostrarTipoTarjeta", con))
+                using (SqlCommand comando = new SqlCommand("P_mostrarTipoPago", con))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
                     using (SqlDataReader leer = comando.ExecuteReader())
                     {
-                        Tipos.Load(leer);
+                        tiposPago.Load(leer);
                     }
                 }
             }
-            return Tipos;
+            return tiposPago;
         }
 
-        //editar tipos de tarjetas
-        public void EditarTipoTarjeta(int Id, string Nombre)
+        // Modificar tipo de pago
+        public void EditarTipoPago(int idTipoPago, string nombre)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
-                using (SqlCommand comando = new SqlCommand("P_modificarTipoTarjeta", con))
+                using (SqlCommand comando = new SqlCommand("P_modificarTipoPago", con))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@Id_TipoTarjeta", Id);
-                    comando.Parameters.AddWithValue("@Nombre", Nombre);
+                    comando.Parameters.AddWithValue("@Id_tipoPago", idTipoPago);
+                    comando.Parameters.AddWithValue("@Nombre", nombre);
                     comando.ExecuteNonQuery();
                 }
             }
         }
 
-        //eliminar roles
-        public void EliminarTipoTarjeta(int Id)
+        // Eliminar tipo de pago
+        public void EliminarTipoPago(int idTipoPago)
         {
             using (SqlConnection con = conexion.crearConexion())
             {
                 con.Open();
-                using (SqlCommand comando = new SqlCommand("P_eliminarTipoTarjeta", con))
+                using (SqlCommand comando = new SqlCommand("P_eliminarTipoPago", con))
                 {
                     comando.CommandType = CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@Id_TipoTarjeta", Id);
+                    comando.Parameters.AddWithValue("@Id_tipoPago", idTipoPago);
                     comando.ExecuteNonQuery();
                 }
             }

@@ -145,6 +145,7 @@
             this.btnMarcas.TabIndex = 4;
             this.btnMarcas.Text = "Marcas";
             this.btnMarcas.UseVisualStyleBackColor = false;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
             // 
             // btnRoles
             // 
@@ -157,6 +158,7 @@
             this.btnRoles.TabIndex = 5;
             this.btnRoles.Text = "Roles";
             this.btnRoles.UseVisualStyleBackColor = false;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
             // 
             // btnPagos
             // 

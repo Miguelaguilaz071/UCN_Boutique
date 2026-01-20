@@ -132,6 +132,9 @@
     <EmbeddedResource Include="UC_Productos.resx">
       <DependentUpon>UC_Productos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_Roles.resx">
+      <DependentUpon>UC_Roles.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC_Usuario.resx">
       <DependentUpon>UC_Usuario.cs</DependentUpon>
     </EmbeddedResource>
