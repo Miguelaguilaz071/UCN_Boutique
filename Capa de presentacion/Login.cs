@@ -80,7 +80,8 @@ namespace Capa_de_presentacion
                 this.Hide();
                 if (rol == "Cliente")
                 {
-                    MessageBox.Show("Acceso denegado");
+                    Frm_Cliente cliente = new Frm_Cliente();
+                    cliente.ShowDialog();
                 }
                 else if (rol == "Administrador")
                 {

@@ -30,18 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAdmin));
             this.panelOpciones = new System.Windows.Forms.Panel();
+            this.btnPagos = new System.Windows.Forms.Button();
+            this.btnRoles = new System.Windows.Forms.Button();
+            this.btnMarcas = new System.Windows.Forms.Button();
+            this.btnInventario = new System.Windows.Forms.Button();
+            this.btnSucursales = new System.Windows.Forms.Button();
             this.btnVentas = new System.Windows.Forms.Button();
             this.btnProductos = new System.Windows.Forms.Button();
             this.btnUsuarios = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
-            this.btnSucursales = new System.Windows.Forms.Button();
-            this.btnInventario = new System.Windows.Forms.Button();
-            this.btnMarcas = new System.Windows.Forms.Button();
-            this.btnRoles = new System.Windows.Forms.Button();
-            this.btnPagos = new System.Windows.Forms.Button();
             this.uC_Usuario1 = new Capa_de_presentacion.UC_Usuario();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.panelOpciones.SuspendLayout();
             this.panelCentral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelOpciones
@@ -60,6 +62,71 @@
             this.panelOpciones.Name = "panelOpciones";
             this.panelOpciones.Size = new System.Drawing.Size(1032, 41);
             this.panelOpciones.TabIndex = 0;
+            // 
+            // btnPagos
+            // 
+            this.btnPagos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnPagos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPagos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPagos.Location = new System.Drawing.Point(768, 5);
+            this.btnPagos.Name = "btnPagos";
+            this.btnPagos.Size = new System.Drawing.Size(120, 30);
+            this.btnPagos.TabIndex = 6;
+            this.btnPagos.Text = "Pagos";
+            this.btnPagos.UseVisualStyleBackColor = false;
+            this.btnPagos.Click += new System.EventHandler(this.btnPagos_Click);
+            // 
+            // btnRoles
+            // 
+            this.btnRoles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRoles.Location = new System.Drawing.Point(642, 5);
+            this.btnRoles.Name = "btnRoles";
+            this.btnRoles.Size = new System.Drawing.Size(120, 30);
+            this.btnRoles.TabIndex = 5;
+            this.btnRoles.Text = "Roles";
+            this.btnRoles.UseVisualStyleBackColor = false;
+            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
+            // 
+            // btnMarcas
+            // 
+            this.btnMarcas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnMarcas.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMarcas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMarcas.Location = new System.Drawing.Point(516, 5);
+            this.btnMarcas.Name = "btnMarcas";
+            this.btnMarcas.Size = new System.Drawing.Size(120, 30);
+            this.btnMarcas.TabIndex = 4;
+            this.btnMarcas.Text = "Marcas";
+            this.btnMarcas.UseVisualStyleBackColor = false;
+            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
+            // 
+            // btnInventario
+            // 
+            this.btnInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnInventario.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInventario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventario.Location = new System.Drawing.Point(390, 5);
+            this.btnInventario.Name = "btnInventario";
+            this.btnInventario.Size = new System.Drawing.Size(120, 30);
+            this.btnInventario.TabIndex = 3;
+            this.btnInventario.Text = "Inventario";
+            this.btnInventario.UseVisualStyleBackColor = false;
+            this.btnInventario.Click += new System.EventHandler(this.btnInventario_Click);
+            // 
+            // btnSucursales
+            // 
+            this.btnSucursales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnSucursales.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSucursales.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSucursales.Location = new System.Drawing.Point(264, 5);
+            this.btnSucursales.Name = "btnSucursales";
+            this.btnSucursales.Size = new System.Drawing.Size(120, 30);
+            this.btnSucursales.TabIndex = 2;
+            this.btnSucursales.Text = "Sucursales";
+            this.btnSucursales.UseVisualStyleBackColor = false;
+            this.btnSucursales.Click += new System.EventHandler(this.btnSucursales_Click);
             // 
             // btnVentas
             // 
@@ -109,71 +176,6 @@
             this.panelCentral.Size = new System.Drawing.Size(1032, 562);
             this.panelCentral.TabIndex = 1;
             // 
-            // btnSucursales
-            // 
-            this.btnSucursales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnSucursales.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSucursales.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSucursales.Location = new System.Drawing.Point(264, 5);
-            this.btnSucursales.Name = "btnSucursales";
-            this.btnSucursales.Size = new System.Drawing.Size(120, 30);
-            this.btnSucursales.TabIndex = 2;
-            this.btnSucursales.Text = "Sucursales";
-            this.btnSucursales.UseVisualStyleBackColor = false;
-            this.btnSucursales.Click += new System.EventHandler(this.btnSucursales_Click);
-            // 
-            // btnInventario
-            // 
-            this.btnInventario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnInventario.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInventario.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInventario.Location = new System.Drawing.Point(390, 5);
-            this.btnInventario.Name = "btnInventario";
-            this.btnInventario.Size = new System.Drawing.Size(120, 30);
-            this.btnInventario.TabIndex = 3;
-            this.btnInventario.Text = "Inventario";
-            this.btnInventario.UseVisualStyleBackColor = false;
-            this.btnInventario.Click += new System.EventHandler(this.btnInventario_Click);
-            // 
-            // btnMarcas
-            // 
-            this.btnMarcas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnMarcas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMarcas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMarcas.Location = new System.Drawing.Point(516, 5);
-            this.btnMarcas.Name = "btnMarcas";
-            this.btnMarcas.Size = new System.Drawing.Size(120, 30);
-            this.btnMarcas.TabIndex = 4;
-            this.btnMarcas.Text = "Marcas";
-            this.btnMarcas.UseVisualStyleBackColor = false;
-            this.btnMarcas.Click += new System.EventHandler(this.btnMarcas_Click);
-            // 
-            // btnRoles
-            // 
-            this.btnRoles.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnRoles.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRoles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRoles.Location = new System.Drawing.Point(642, 5);
-            this.btnRoles.Name = "btnRoles";
-            this.btnRoles.Size = new System.Drawing.Size(120, 30);
-            this.btnRoles.TabIndex = 5;
-            this.btnRoles.Text = "Roles";
-            this.btnRoles.UseVisualStyleBackColor = false;
-            this.btnRoles.Click += new System.EventHandler(this.btnRoles_Click);
-            // 
-            // btnPagos
-            // 
-            this.btnPagos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnPagos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPagos.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPagos.Location = new System.Drawing.Point(768, 5);
-            this.btnPagos.Name = "btnPagos";
-            this.btnPagos.Size = new System.Drawing.Size(120, 30);
-            this.btnPagos.TabIndex = 6;
-            this.btnPagos.Text = "Pagos";
-            this.btnPagos.UseVisualStyleBackColor = false;
-            this.btnPagos.Click += new System.EventHandler(this.btnPagos_Click);
-            // 
             // uC_Usuario1
             // 
             this.uC_Usuario1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,6 +183,11 @@
             this.uC_Usuario1.Name = "uC_Usuario1";
             this.uC_Usuario1.Size = new System.Drawing.Size(1032, 562);
             this.uC_Usuario1.TabIndex = 0;
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
             // FrmAdmin
             // 
@@ -197,6 +204,7 @@
             this.Text = "Panel de administración";
             this.panelOpciones.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -213,5 +221,6 @@
         private System.Windows.Forms.Button btnMarcas;
         private System.Windows.Forms.Button btnRoles;
         private System.Windows.Forms.Button btnPagos;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

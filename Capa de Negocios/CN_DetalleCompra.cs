@@ -89,7 +89,7 @@ namespace Capa_de_Negocios
             }
         }
 
-        //eliminar roles
+        //eliminar detalles de compra
         public void EliminarDetalleCompra(int Id_compra, int Id_producto, int Id_sucursal)
         {
             using (SqlConnection con = conexion.crearConexion())
