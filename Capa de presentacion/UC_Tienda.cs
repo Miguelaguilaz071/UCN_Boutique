@@ -375,48 +375,50 @@ namespace Capa_de_presentacion
             }
         }
 
-        private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void EliminarDeLista()
         {
-            presionado = true;
-            resta = 0;
-            DataGridViewRow fila = dataGridView1.Rows[e.RowIndex];
-            id = fila.Cells["Id_producto"]?.Value?.ToString() ?? string.Empty;
-
-            string subtotalStr = fila.Cells["Subtotal"]?.Value?.ToString() ?? "0";
-            subtotalStr = subtotalStr.Replace("$", "").Replace(",", "");
-            resta = Convert.ToDecimal(subtotalStr);
-        }
-
-        private void EliminarDeLista(bool presionado)
-        {
-            if (presionado)
+            if (dataGridView1.CurrentRow == null)
             {
-                ProductoCarrito productoAEliminar = listaCarrito.FirstOrDefault(p => p.Id_producto == id);
+                MessageBox.Show("Seleccione un producto del carrito para eliminar.");
+                return;
+            }
 
-                if (productoAEliminar != null)
-                {
-                    listaCarrito.Remove(productoAEliminar);
-                    total = total - resta;
-                    txtTotalList.Text = total.ToString("C2");
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = listaCarrito;
-                }
-                else
-                {
-                    MessageBox.Show("Producto no encontrado");
-                }
+            string idProducto = dataGridView1.CurrentRow.Cells["Id_producto"].Value?.ToString();
+
+            if (string.IsNullOrEmpty(idProducto))
+            {
+                MessageBox.Show("Producto inválido.");
+                return;
+            }
+
+            ProductoCarrito productoAEliminar = listaCarrito.FirstOrDefault(p => p.Id_producto == idProducto);
+
+            if (productoAEliminar != null)
+            {
+                decimal subtotal = Convert.ToDecimal(
+                    productoAEliminar.Subtotal.Replace("$", "").Replace(",", "")
+                );
+
+                listaCarrito.Remove(productoAEliminar);
+
+                total -= subtotal;
+                txtTotalList.Text = total.ToString("C2");
+
+                dataGridView1.DataSource = null;
+                dataGridView1.DataSource = listaCarrito;
+
+                StockActual();
             }
             else
             {
-                MessageBox.Show("Por favor seleccione la fila del producto a eliminar");
+                MessageBox.Show("Producto no encontrado en el carrito.");
             }
         }
 
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            EliminarDeLista(presionado);
-            StockActual();
-            presionado = false;
+            EliminarDeLista();
         }
 
         private int StockActual()
@@ -504,9 +506,7 @@ namespace Capa_de_presentacion
             {
                 try
                 {
-                    // NOTA: El ID de usuario debe obtenerse del sistema de autenticación
-                    // Por ahora se usa 1 como ejemplo - AJUSTAR según tu sistema de login
-                   
+                    //El Id del usuario lo obtenemos de la clase creada en frm_Login
                     int idUsuario = Convert.ToInt32(UserSession.UserId);
 
                     int idSucursal = Convert.ToInt32(cmbSucursal.SelectedValue);
@@ -619,5 +619,7 @@ namespace Capa_de_presentacion
                 }
             }
         }
+
+        
     }
 }

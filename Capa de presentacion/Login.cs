@@ -149,7 +149,6 @@ namespace Capa_de_presentacion
     }
     public static class UserSession
     {
-        // Usamos propiedades para mayor control
         public static string UserId { get; set; }
     }
 }
