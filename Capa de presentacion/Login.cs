@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -77,6 +78,7 @@ namespace Capa_de_presentacion
             if (resultado.Rows.Count > 0)
             {
                 string rol = resultado.Rows[0]["Rol"].ToString();
+                UserSession.UserId = resultado.Rows[0]["Id_usuario"].ToString();
                 this.Hide();
                 if (rol == "Cliente")
                 {
@@ -101,6 +103,7 @@ namespace Capa_de_presentacion
                 txtCorreo.Text = "Correo";
                 txtContrasena.Text = "Contraseña";
                 txtContrasena.UseSystemPasswordChar = false;
+                chkMostrarContrasena.Checked = false;
             }
             else 
             {
@@ -143,5 +146,10 @@ namespace Capa_de_presentacion
                 txtContrasena.UseSystemPasswordChar = !chkMostrarContrasena.Checked;
             }
         }
+    }
+    public static class UserSession
+    {
+        // Usamos propiedades para mayor control
+        public static string UserId { get; set; }
     }
 }

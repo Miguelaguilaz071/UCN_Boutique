@@ -521,7 +521,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.label8.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label8.Location = new System.Drawing.Point(13, 156);
+            this.label8.Location = new System.Drawing.Point(11, 146);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 20);
             this.label8.TabIndex = 4;
@@ -532,7 +532,7 @@
             this.txtTotalList.AutoSize = true;
             this.txtTotalList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.txtTotalList.ForeColor = System.Drawing.Color.DarkGreen;
-            this.txtTotalList.Location = new System.Drawing.Point(76, 156);
+            this.txtTotalList.Location = new System.Drawing.Point(14, 167);
             this.txtTotalList.Name = "txtTotalList";
             this.txtTotalList.Size = new System.Drawing.Size(54, 20);
             this.txtTotalList.TabIndex = 3;

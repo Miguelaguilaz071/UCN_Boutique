@@ -119,7 +119,7 @@
             // 
             this.btnSucursales.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.btnSucursales.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSucursales.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSucursales.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.btnSucursales.Location = new System.Drawing.Point(264, 5);
             this.btnSucursales.Name = "btnSucursales";
             this.btnSucursales.Size = new System.Drawing.Size(120, 30);

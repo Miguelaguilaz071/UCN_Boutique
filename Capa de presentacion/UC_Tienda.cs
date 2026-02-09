@@ -20,6 +20,7 @@ namespace Capa_de_presentacion
         CN_Sucursal cn_sucursal = new CN_Sucursal();
         CN_Compra cn_compra = new CN_Compra();
         CN_DetalleCompra cn_detalleCompra = new CN_DetalleCompra();
+        CN_MetodoDePago cn_metodoPago = new CN_MetodoDePago();
 
         DataTable CategoriaProductos = new DataTable();
         DataTable ProductosBuscados = new DataTable();
@@ -478,6 +479,7 @@ namespace Capa_de_presentacion
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
+            // Validaciones iniciales
             if (listaCarrito.Count == 0)
             {
                 MessageBox.Show("El carrito está vacío. Agregue productos antes de comprar.");
@@ -490,8 +492,9 @@ namespace Capa_de_presentacion
                 return;
             }
 
+            // Confirmar compra
             DialogResult resultado = MessageBox.Show(
-                $"¿Confirmar compra por un total de {txtTotalList.Text}?",
+                $"¿Confirmar compra por un total de {txtTotalList.Text}?\n\nSe procesará con tarjeta de crédito.",
                 "Confirmar Compra",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -501,135 +504,120 @@ namespace Capa_de_presentacion
             {
                 try
                 {
-                    // Solicitar método de pago al usuario
-                    int idMetodoPago = SolicitarMetodoPago();
-
-                    if (idMetodoPago == 0)
-                    {
-                        MessageBox.Show("Debe seleccionar un método de pago válido.");
-                        return;
-                    }
-
-                    // Obtener el ID del usuario (asume que tienes una variable global o sesión)
-                    // Por ahora usaré 1 como ejemplo, debes ajustarlo según tu sistema de login
-                    int idUsuario = 1; // CAMBIAR ESTO según tu sistema de autenticación
+                    // NOTA: El ID de usuario debe obtenerse del sistema de autenticación
+                    // Por ahora se usa 1 como ejemplo - AJUSTAR según tu sistema de login
+                   
+                    int idUsuario = Convert.ToInt32(UserSession.UserId);
 
                     int idSucursal = Convert.ToInt32(cmbSucursal.SelectedValue);
 
-                    // 1. Registrar la compra principal
-                    cn_compra.AgregarCompra(idUsuario, idSucursal, idMetodoPago);
+                    // ID del tipo de pago "Tarjeta de crédito"
+                    int idTipoPago = 2;
 
-                    // 2. Obtener el ID de la compra recién creada
-                    DataTable compras = cn_compra.MostrarCompra();
-                    int idCompra = 0;
-                    if (compras.Rows.Count > 0)
+                    // Generar un token único para este método de pago
+                    string token = Guid.NewGuid().ToString();
+
+                    // 1. Crear el método de pago con tipo "Tarjeta de crédito"
+                    cn_metodoPago.AgregarMetodoPago(idUsuario, idTipoPago, token);
+
+                    // 2. Obtener el ID del método de pago recién creado
+                    DataTable metodosPago = cn_metodoPago.MostrarMetodosPago();
+                    int idMetodoPago = 0;
+
+                    if (metodosPago.Rows.Count > 0)
                     {
-                        // Obtener el último ID (la compra recién insertada)
-                        idCompra = Convert.ToInt32(compras.Rows[compras.Rows.Count - 1]["Id_compra"]);
-                    }
+                        // Buscar el método de pago con el token que acabamos de crear
+                        DataRow[] metodosEncontrados = metodosPago.Select($"Token = '{token}'");
 
-                    // 3. Registrar todos los detalles de la compra
-                    foreach (ProductoCarrito producto in listaCarrito)
-                    {
-                        int idProducto = Convert.ToInt32(producto.Id_producto);
-                        int cantidad = Convert.ToInt32(producto.Cantidad);
-
-                        // Obtener el precio del producto
-                        DataTable productos = cn_producto.mostrarProductos();
-                        DataRow[] productoEncontrado = productos.Select($"Id_producto = {idProducto}");
-
-                        if (productoEncontrado.Length > 0)
+                        if (metodosEncontrados.Length > 0)
                         {
-                            double precioUnitario = Convert.ToDouble(productoEncontrado[0]["Precio"]);
+                            idMetodoPago = Convert.ToInt32(metodosEncontrados[0]["Id_metodoPago"]);
 
-                            // Agregar detalle de compra
-                            cn_detalleCompra.AgregarDetalleCompra(
-                                idCompra,
-                                idProducto,
-                                idSucursal,
-                                cantidad,
-                                precioUnitario
-                            );
+                            // 3. Registrar la compra principal
+                            cn_compra.AgregarCompra(idUsuario, idSucursal, idMetodoPago);
+
+                            // 4. Obtener el ID de la compra recién creada
+                            DataTable compras = cn_compra.MostrarCompra();
+                            int idCompra = 0;
+
+                            if (compras.Rows.Count > 0)
+                            {
+                                // Obtener el último ID (la compra recién insertada)
+                                idCompra = Convert.ToInt32(compras.Rows[compras.Rows.Count - 1]["Id_compra"]);
+
+                                // 5. Registrar todos los detalles de la compra
+                                foreach (ProductoCarrito producto in listaCarrito)
+                                {
+                                    int idProducto = Convert.ToInt32(producto.Id_producto);
+                                    int cantidad = Convert.ToInt32(producto.Cantidad);
+
+                                    // Obtener el precio del producto
+                                    DataTable productos = cn_producto.mostrarProductos();
+                                    DataRow[] productoEncontrado = productos.Select($"Id_producto = {idProducto}");
+
+                                    if (productoEncontrado.Length > 0)
+                                    {
+                                        double precioUnitario = Convert.ToDouble(productoEncontrado[0]["Precio"]);
+
+                                        // Agregar detalle de compra
+                                        cn_detalleCompra.AgregarDetalleCompra(
+                                            idCompra,
+                                            idProducto,
+                                            idSucursal,
+                                            cantidad,
+                                            precioUnitario
+                                        );
+                                    }
+                                }
+
+                                // 6. Mensaje de éxito y limpiar carrito
+                                MessageBox.Show(
+                                    "¡Compra realizada exitosamente!\n\n" +
+                                    $"Total pagado: {txtTotalList.Text}\n" +
+                                    "Método de pago: Tarjeta de crédito\n\n" +
+                                    "Gracias por su compra.",
+                                    "Compra Exitosa",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                );
+
+                                // Limpiar carrito
+                                listaCarrito.Clear();
+                                total = 0;
+                                txtTotalList.Text = "$0.00";
+                                dataGridView1.DataSource = null;
+                                dataGridView1.DataSource = listaCarrito;
+                                StockActual();
+
+                                // Actualizar la visualización del producto actual
+                                MostrarProductoActual();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error: No se pudo obtener el ID de la compra.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error: No se pudo crear el método de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-
-                    MessageBox.Show("¡Compra realizada exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Limpiar carrito
-                    listaCarrito.Clear();
-                    total = 0;
-                    txtTotalList.Text = "$0.00";
-                    dataGridView1.DataSource = null;
-                    dataGridView1.DataSource = listaCarrito;
-                    StockActual();
-
-                    // Actualizar la visualización del producto actual
-                    MostrarProductoActual();
+                    else
+                    {
+                        MessageBox.Show("Error: No se pudo acceder a los métodos de pago.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al procesar la compra: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(
+                        "Error al procesar la compra:\n\n" + ex.Message +
+                        "\n\nVerifique que haya suficiente stock en la sucursal seleccionada.",
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                    );
                 }
             }
-        }
-
-        private int SolicitarMetodoPago()
-        {
-            // Crear un formulario simple para seleccionar método de pago
-            Form formPago = new Form();
-            formPago.Text = "Seleccionar Método de Pago";
-            formPago.Size = new Size(350, 180);
-            formPago.StartPosition = FormStartPosition.CenterParent;
-            formPago.FormBorderStyle = FormBorderStyle.FixedDialog;
-            formPago.MaximizeBox = false;
-            formPago.MinimizeBox = false;
-
-            Label lblMetodo = new Label();
-            lblMetodo.Text = "Método de Pago:";
-            lblMetodo.Location = new Point(20, 20);
-            lblMetodo.Size = new Size(120, 20);
-
-            ComboBox cmbMetodoPago = new ComboBox();
-            cmbMetodoPago.Location = new Point(20, 45);
-            cmbMetodoPago.Size = new Size(290, 25);
-            cmbMetodoPago.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            // Cargar métodos de pago disponibles
-            CN_MetodoDePago cn_metodoPago = new CN_MetodoDePago();
-            DataTable metodosPago = cn_metodoPago.MostrarMetodosPago();
-
-            cmbMetodoPago.DataSource = metodosPago;
-            cmbMetodoPago.DisplayMember = "Nombre"; // Ajusta según el nombre de columna en tu tabla
-            cmbMetodoPago.ValueMember = "Id_metodoPago";
-            cmbMetodoPago.SelectedIndex = -1;
-
-            Button btnAceptar = new Button();
-            btnAceptar.Text = "Aceptar";
-            btnAceptar.Location = new Point(150, 90);
-            btnAceptar.Size = new Size(80, 30);
-            btnAceptar.DialogResult = DialogResult.OK;
-
-            Button btnCancelar = new Button();
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.Location = new Point(240, 90);
-            btnCancelar.Size = new Size(80, 30);
-            btnCancelar.DialogResult = DialogResult.Cancel;
-
-            formPago.Controls.Add(lblMetodo);
-            formPago.Controls.Add(cmbMetodoPago);
-            formPago.Controls.Add(btnAceptar);
-            formPago.Controls.Add(btnCancelar);
-
-            formPago.AcceptButton = btnAceptar;
-            formPago.CancelButton = btnCancelar;
-
-            int idMetodoPago = 0;
-            if (formPago.ShowDialog() == DialogResult.OK && cmbMetodoPago.SelectedIndex != -1)
-            {
-                idMetodoPago = Convert.ToInt32(cmbMetodoPago.SelectedValue);
-            }
-
-            return idMetodoPago;
         }
     }
 }
